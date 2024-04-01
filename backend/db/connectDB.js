@@ -1,27 +1,27 @@
-import dotenv from "dotenv";
-import mongoose from "mongoose";
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 
 dotenv.config();
 // console.log(process.env);
 
-export async function connectDB() {
+async function connectDB() {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log("connected into database successfully");
+    console.log("Connected to the database successfully");
   } catch (error) {
-    console.log("error occur", error);
+    console.log("Error occurred while connecting to the database:", error);
     process.exit(1);
   }
 }
 
-export async function disconnectDB() {
+async function disconnectDB() {
   try {
     await mongoose.disconnect();
     console.log("Disconnected from the database.");
-  } catch (err) {
-    console.log("Error: ", error);
+  } catch (error) {
+    console.log("Error occurred while disconnecting from the database:", error);
     process.exit(1);
   }
 }
 
-
+module.exports = { connectDB, disconnectDB };
