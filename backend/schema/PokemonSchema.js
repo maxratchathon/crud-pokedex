@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+import mongoose from "mongoose";
 
 const pokemonSchema = new mongoose.Schema({
   id: Number,
@@ -19,5 +19,5 @@ const pokemonSchema = new mongoose.Schema({
   next_evolution: [{ num: Number }, { name: String }],
 });
 
-const Pokemon = mongoose.model("Pokemon", pokemonSchema);
-export default Pokemon;
+const Pokemons = mongoose.model("Pokemons", pokemonSchema);
+export default Pokemons;
