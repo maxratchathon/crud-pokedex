@@ -2,21 +2,21 @@ const mongoose = require("mongoose");
 
 const pokemonSchema = new mongoose.Schema({
   id: Number,
-  num: Number,
+  num: String,
   name: String,
   img: String,
   type: [String],
-  height: Number,
-  weight: Number,
+  height: String,
+  weight: String,
   candy: String,
-  egg: Number,
+  egg: String,
   multipliers: [Number],
   weaknesses: [String],
   candy_count: Number,
   spawn_chance: Number,
   avg_spawns: Number,
-  prev_evolution: [{ num: Number }, { name: String }],
-  next_evolution: [{ num: Number }, { name: String }],
+  prev_evolution: [{ num: String }, { name: String }],
+  next_evolution: [{ num: String }, { name: String }],
 });
 
 const Pokemons = mongoose.model("Pokemons", pokemonSchema);
