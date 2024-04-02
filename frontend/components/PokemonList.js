@@ -7,7 +7,7 @@ const PokemonList = ({ pokemonData }) => {
       <div className="">
         <h1 className="text-3xl text-center font-bold mb-8">Pokemon List</h1>
       </div>
-      <div className="flex flex-wrap gap-10 w-[150vh] justify-center">
+      <div className="flex flex-wrap gap-10 lg:w-[150vh] justify-center">
         {pokemonData && pokemonData.length > 0 ? (
           pokemonData.map((pokemon) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
