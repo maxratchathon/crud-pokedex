@@ -7,7 +7,7 @@ const PokemonCard = ({ pokemon }) => {
   console.log(pokemon.prev_evolution);
 
   return (
-    <div className="relative flex flex-col justify-start items-center bg-white border  rounded-lg shadow-lg p-6 w-[350px] h-[600px]">
+    <div className="relative flex flex-col justify-start items-center bg-white border  rounded-[15px] shadow-lg p-6 w-[350px] h-[550px]">
       <img src={pokemon.img} className="w-[150px] " />
       <h2 className="text-xl font-semibold mb-2">
         {pokemon.num}. {pokemon.name}
@@ -45,6 +45,18 @@ const PokemonCard = ({ pokemon }) => {
             {pokemon.next_evolution.join(", ")}
           </p>
         ) : null}
+        <p className="text-gray-600 whitespace-wrap">
+          <span className="font-bold">Candy: </span> {pokemon.candy}{" "}
+          {pokemon.candy_count ? " : " + pokemon.candy_count : null}
+        </p>
+        <p className="text-gray-600 whitespace-wrap">
+          <span className="font-bold">Spawn Chance: </span>{" "}
+          {pokemon.spawn_chance} % ( at {pokemon.spawn_time} )
+        </p>
+        <p className="text-gray-600 whitespace-wrap">
+          <span className="font-bold">Average Spawns: </span>{" "}
+          {pokemon.avg_spawns}
+        </p>
 
         <div className="">
           <div className="absolute bottom-5 right-5 flex justify-end ">

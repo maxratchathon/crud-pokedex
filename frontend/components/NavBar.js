@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import pokemonIcon from "../img/pokemonIcon.png";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const navigation = [
   { name: "Add Pokemon", href: "#", current: true },
@@ -13,6 +14,9 @@ function classNames(...classes) {
 }
 
 export default function NavBar() {
+  function signOutHandle() {
+    signOut();
+  }
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -121,7 +125,7 @@ export default function NavBar() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            onClick={signOutHandle}
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
