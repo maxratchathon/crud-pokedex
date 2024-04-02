@@ -1,15 +1,25 @@
+import axios from "axios";
 import React from "react";
 import { MdEditDocument } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 
 const PokemonCard = ({ pokemon }) => {
-  console.log(pokemon);
-  console.log(pokemon.prev_evolution);
+  async function onDelete() {
+    console.log("clicked on delete");
+    try {
+      const response = axios.delete(
+        `http://localhost:8000/api/pokemon/${pokemon.id}`
+      );
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="relative flex flex-col justify-start items-center bg-white border  rounded-[15px] shadow-lg p-6 w-[350px] h-[550px]">
       <img src={pokemon.img} className="w-[150px] " />
-      <h2 className="text-xl font-semibold mb-2">
+      <h2 className="mb-2 text-xl font-semibold">
         {pokemon.num}. {pokemon.name}
       </h2>
       <div className="w-[100%] flex flex-col ">
@@ -59,9 +69,13 @@ const PokemonCard = ({ pokemon }) => {
         </p>
 
         <div className="">
-          <div className="absolute bottom-5 right-5 flex justify-end ">
+          <div className="absolute flex justify-end bottom-5 right-5 ">
             <MdEditDocument size={30} className="text-gray-600" />
-            <MdDeleteForever size={30} className="text-gray-600" />
+            <MdDeleteForever
+              onClick={onDelete}
+              size={30}
+              className="text-gray-600"
+            />
           </div>
         </div>
       </div>

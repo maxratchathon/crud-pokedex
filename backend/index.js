@@ -7,7 +7,7 @@ const Pokemons = require("./schema/PokemonSchema.js");
 const cors = require("cors");
 
 connectDB();
-
+app.use(express.json());
 app.use(cors());
 
 app.get("/api/pokemon", async (req, res) => {
@@ -19,6 +19,25 @@ app.get("/api/pokemon", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+app.post("/api/pokemon", async (req, res) => {
+  try {
+    console.log(req.body);
+    const pokemons = await Pokemons.create(req.body);
+    res.status(200);
+  } catch (error) {
+    console.log(`error occur ${error}`);
+  }
+});
+
+// app.delete("/api/pokemon", async (req, res) => {
+//   try {
+//     console.log(req.body);
+//     res.status(200);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 app.listen(PORT, (error) => {
   if (!error) {

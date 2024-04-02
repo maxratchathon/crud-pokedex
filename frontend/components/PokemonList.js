@@ -1,12 +1,41 @@
 import React from "react";
 import PokemonCard from "./PokemonCard";
 import { FaPlusCircle } from "react-icons/fa";
+import axios from "axios";
 
 const PokemonList = ({ pokemonData }) => {
+  async function onAdd() {
+    const data = {
+      num: "024",
+      name: "Arbok (test data)",
+      img: "http://www.serebii.net/pokemongo/pokemon/024.png",
+      type: ["Poison"],
+      height: "3.51 m",
+      weight: "65.0 kg",
+      candy: "Ekans Candy",
+      egg: "Not in Eggs",
+      multipliers: null,
+      weaknesses: ["Ground", "Psychic"],
+      spawn_chance: 0.072,
+      avg_spawns: 7.2,
+      spawn_time: "01:50",
+      prev_evolution: [{ num: "023", name: "Ekans" }],
+    };
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/pokemon",
+        data
+      );
+      console.log(`response: ${response}`);
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
   return (
-    <div className="flex flex-col mx-auto px-4">
+    <div className="flex flex-col px-4 mx-auto">
       <div className="">
-        <h1 className="text-3xl text-center m-10 font-bold mb-10">
+        <h1 className="m-10 mb-10 text-3xl font-bold text-center">
           CRUD Pokedex
         </h1>
       </div>
@@ -18,7 +47,10 @@ const PokemonList = ({ pokemonData }) => {
         ) : (
           <p>No Pokemon found.</p>
         )}
-        <div className="w-[350px] h-[550px] flex flex-col justify-center gap-5 items-center bg-gray-100 p-6 rounded-lg shadow-md border border-gray-200">
+        <div
+          onClick={onAdd}
+          className="w-[350px] h-[550px] flex flex-col justify-center gap-5 items-center bg-gray-100 p-6 rounded-lg shadow-md border border-gray-200"
+        >
           <FaPlusCircle size={50} className="text-gray-600" />
           <p className="text-gray-600 ">Add a new Pokemon</p>
         </div>
