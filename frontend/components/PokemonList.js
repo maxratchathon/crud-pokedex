@@ -3,9 +3,11 @@ import PokemonCard from "./PokemonCard";
 
 const PokemonList = ({ pokemonData }) => {
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-3xl font-bold mb-8">Pokemon List</h1>
-      <div className="flex flex-wrap gap-10">
+    <div className="flex flex-col mx-auto px-4">
+      <div className="">
+        <h1 className="text-3xl text-center font-bold mb-8">Pokemon List</h1>
+      </div>
+      <div className="flex flex-wrap gap-10 w-[150vh] justify-center">
         {pokemonData && pokemonData.length > 0 ? (
           pokemonData.map((pokemon) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />

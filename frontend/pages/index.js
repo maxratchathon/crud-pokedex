@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PokemonList from "../components/PokemonList";
 import axios from "axios";
+import NavBar from "../components/NavBar";
 
 const Home = () => {
   const [pokemonData, setPokemonData] = useState([]);
@@ -24,8 +25,8 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="">
-      <h1 className="text-3xl font-bold underline">CRUD-Pokedex</h1>
+    <div className="flex flex-col justify-center">
+      <NavBar />
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
