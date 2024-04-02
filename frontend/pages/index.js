@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import PokemonList from "../components/PokemonList";
 import axios from "axios";
 
-
 const Home = () => {
   const [pokemonData, setPokemonData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,7 +24,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="">
       <h1 className="text-3xl font-bold underline">CRUD-Pokedex</h1>
       {loading ? (
         <p>Loading...</p>
