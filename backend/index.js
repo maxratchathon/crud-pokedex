@@ -30,14 +30,20 @@ app.post("/api/pokemon", async (req, res) => {
   }
 });
 
-// app.delete("/api/pokemon", async (req, res) => {
-//   try {
-//     console.log(req.body);
-//     res.status(200);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
+app.delete("/api/pokemon/:_id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const deletedPokemon = await Pokemons.deleteOne({ id: id });
+    if (deletedPokemon.deletedCount == 1) {
+      res.status(200).json({ message: "Deleted Successfully" });
+    } else {
+      res.status(400).json({ error: "can not delete, pokemon not found" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 app.listen(PORT, (error) => {
   if (!error) {

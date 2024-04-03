@@ -2,15 +2,17 @@ import axios from "axios";
 import React from "react";
 import { MdEditDocument } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
+import Pokemons from "../../backend/schema/PokemonSchema";
 
 const PokemonCard = ({ pokemon }) => {
   async function onDelete() {
     console.log("clicked on delete");
     try {
-      const response = axios.delete(
-        `http://localhost:8000/api/pokemon/${pokemon.id}`
+      console.log("pokemon id:", pokemon._id);
+      const response = await axios.delete(
+        `http://localhost:8000/api/pokemon/${pokemon._id}`
       );
-      
+      console.log(response);
     } catch (error) {
       console.log(error);
     }

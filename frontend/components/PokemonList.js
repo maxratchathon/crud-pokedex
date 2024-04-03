@@ -6,6 +6,7 @@ import axios from "axios";
 const PokemonList = ({ pokemonData }) => {
   async function onAdd() {
     const data = {
+      id: 999,
       num: "024",
       name: "Arbok (test data)",
       img: "http://www.serebii.net/pokemongo/pokemon/024.png",
