@@ -6,15 +6,15 @@ import Pokemons from "../../backend/schema/PokemonSchema";
 
 const PokemonCard = ({ pokemon }) => {
   async function onDelete() {
-    console.log("clicked on delete");
+    console.log("clicked on delete with id: ", pokemon._id);
     try {
       console.log("pokemon id:", pokemon._id);
       const response = await axios.delete(
         `http://localhost:8000/api/pokemon/${pokemon._id}`
       );
-      console.log(response);
+      console.log(`sent delete request with id: ${pokemon._id}`);
     } catch (error) {
-      console.log(error);
+      console.log("PokemonCard error: ", error);
     }
   }
 

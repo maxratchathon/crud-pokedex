@@ -22,19 +22,19 @@ app.get("/api/pokemon", async (req, res) => {
 
 app.post("/api/pokemon", async (req, res) => {
   try {
-    console.log(req.body);
+    console.log("req.body: ", req.body);
     const pokemons = await Pokemons.create(req.body);
-    res.status(200);
+    res.status(200).json({ message: "added successfully" });
   } catch (error) {
     console.log(`error occur ${error}`);
   }
 });
 
-app.delete("/api/pokemon/:_id", async (req, res) => {
+app.delete("/api/pokemon/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const deletedPokemon = await Pokemons.deleteOne({ id: id });
+    const deletedPokemon = await Pokemons.deleteOne({ _id: id });
     if (deletedPokemon.deletedCount == 1) {
       res.status(200).json({ message: "Deleted Successfully" });
     } else {

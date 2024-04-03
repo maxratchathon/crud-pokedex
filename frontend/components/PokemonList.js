@@ -43,7 +43,7 @@ const PokemonList = ({ pokemonData }) => {
       <div className="flex flex-wrap gap-10 lg:w-[150vh] justify-center">
         {pokemonData && pokemonData.length > 0 ? (
           pokemonData.map((pokemon) => (
-            <PokemonCard key={pokemon.id} pokemon={pokemon} />
+            <PokemonCard key={pokemon._id} pokemon={pokemon} />
           ))
         ) : (
           <p>No Pokemon found.</p>
