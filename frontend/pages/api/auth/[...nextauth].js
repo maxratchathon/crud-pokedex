@@ -18,11 +18,20 @@ const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        //console.log(`credentials: ${credentials}`);
+        try {
+          console.log("User authenticated successfully");
+          return { email: credentials.email, password: credentials.password };
+        } catch (error) {
+          console.error("Error authenticating user:", error);
+          return null;
+        } finally {
+        }
       },
     }),
   ],
-  pages: {},
+  pages: {
+    signIn: "/login",
+  },
 };
 
 export default NextAuth(authOptions);

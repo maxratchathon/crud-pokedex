@@ -155,7 +155,7 @@ const FormPage = () => {
         </div>
         <div className="mb-4">
           <label className="block mb-2 font-bold">Multipliers:</label>
-          <input
+          <inputs
             type="String"
             name="multipliers"
             value={pokemonData.multipliers}
