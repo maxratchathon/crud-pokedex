@@ -2,23 +2,10 @@ import axios from "axios";
 import React from "react";
 import { MdEditDocument } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
-import Pokemons from "../../backend/schema/PokemonSchema";
+
 import Link from "next/link";
 
-const PokemonCard = ({ pokemon }) => {
-  async function onDelete() {
-    console.log("clicked on delete with id: ", pokemon._id);
-    try {
-      console.log("pokemon id:", pokemon._id);
-      const response = await axios.delete(
-        `http://localhost:8000/api/pokemon/${pokemon._id}`
-      );
-      console.log(`sent delete request with id: ${pokemon._id}`);
-    } catch (error) {
-      console.log("PokemonCard error: ", error);
-    }
-  }
-
+const PokemonCard = ({ pokemon, onOpenModal }) => {
   async function onEdit() {
     try {
       const response = await axios.get(
@@ -96,7 +83,9 @@ const PokemonCard = ({ pokemon }) => {
               />
             </Link>
             <MdDeleteForever
-              onClick={onDelete}
+              onClick={() => {
+                onOpenModal(pokemon);
+              }}
               size={30}
               className="text-gray-600"
             />

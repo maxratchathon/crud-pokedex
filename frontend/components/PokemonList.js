@@ -2,8 +2,10 @@ import React from "react";
 import PokemonCard from "./PokemonCard";
 import { FaPlusCircle } from "react-icons/fa";
 import axios from "axios";
+import { useRouter } from "next/router";
 
-const PokemonList = ({ pokemonData }) => {
+const PokemonList = ({ pokemonData, onOpenModal }) => {
+  const router = useRouter();
   async function onAdd() {
     const data = {
       id: 999,
@@ -27,6 +29,7 @@ const PokemonList = ({ pokemonData }) => {
         "http://localhost:8000/api/pokemon",
         data
       );
+      router.reload();
       console.log(`response: ${response}`);
     } catch (error) {
       console.log("error", error);
@@ -43,7 +46,11 @@ const PokemonList = ({ pokemonData }) => {
       <div className="flex flex-wrap gap-10 lg:w-[150vh] justify-center">
         {pokemonData && pokemonData.length > 0 ? (
           pokemonData.map((pokemon) => (
-            <PokemonCard key={pokemon._id} pokemon={pokemon} />
+            <PokemonCard
+              key={pokemon._id}
+              pokemon={pokemon}
+              onOpenModal={onOpenModal}
+            />
           ))
         ) : (
           <p>No Pokemon found.</p>

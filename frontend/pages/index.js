@@ -3,12 +3,15 @@ import PokemonList from "../components/PokemonList";
 import axios from "axios";
 import NavBar from "../components/NavBar";
 import { useSession, signIn, signOut } from "next-auth/react";
+import DeleteModal from "../components/DeleteModal";
 
 const Home = () => {
   const [pokemonData, setPokemonData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { data: session } = useSession();
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   useEffect(() => {
     const fetchPokemonData = async () => {
@@ -26,6 +29,14 @@ const Home = () => {
     fetchPokemonData();
   }, []);
 
+  const handleOpenModal = (pokemon) => {
+    setShowModal(true);
+    setSelectedPokemon(pokemon);
+  };
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   if (session) {
     return (
       <div className="flex flex-col justify-center">
@@ -35,11 +46,23 @@ const Home = () => {
         ) : error ? (
           <p>{error}</p>
         ) : (
-          <PokemonList pokemonData={pokemonData} />
+          <>
+            {showModal && (
+              <DeleteModal
+                onCloseModal={handleCloseModal}
+                pokemon={selectedPokemon}
+              />
+            )}
+            <PokemonList
+              pokemonData={pokemonData}
+              onOpenModal={handleOpenModal}
+            />
+          </>
         )}
       </div>
     );
   }
+
   return (
     <>
       Not signed in <br />
