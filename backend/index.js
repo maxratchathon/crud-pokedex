@@ -86,14 +86,17 @@ app.post("/api/register/", async (req, res) => {
 app.post("/api/login/", async (req, res) => {
   try {
     const { email, password } = req.body;
-
     const user = await User.findOne({ email });
+    console.log(`${email} ${password}`);
 
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
+    console.log(
+      `isPasswordMatch: ${isPasswordMatch} user.password: ${user.password} password:${password}`
+    );
 
     if (!isPasswordMatch) {
       return res.status(400).json({ message: "Invalid credentials" });

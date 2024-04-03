@@ -4,6 +4,7 @@ import axios from "axios";
 import NavBar from "../components/NavBar";
 import { useSession, signIn, signOut } from "next-auth/react";
 import DeleteModal from "../components/DeleteModal";
+import { useRouter } from "next/router";
 
 const Home = () => {
   const [pokemonData, setPokemonData] = useState([]);
@@ -13,6 +14,7 @@ const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
+  const router = useRouter();
   useEffect(() => {
     const fetchPokemonData = async () => {
       try {
@@ -67,12 +69,20 @@ const Home = () => {
     <div className="flex items-center justify-center w-screen h-screen">
       <div className="text-center">
         <h1 className="mb-4 text-3xl">You are not signed in</h1>
-        <button
-          className="px-4 py-2 text-white rounded bg-stone-500"
-          onClick={() => signIn()}
-        >
-          Sign in
-        </button>
+        <div className="flex justify-center gap-5">
+          <button
+            className="px-4 py-2 text-white rounded bg-stone-500"
+            onClick={() => signIn()}
+          >
+            Sign in
+          </button>
+          <button
+            className="px-4 py-2 text-white rounded bg-stone-500"
+            onClick={() => router.push("register")}
+          >
+            Register
+          </button>
+        </div>
       </div>
     </div>
   );

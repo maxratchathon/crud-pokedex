@@ -1,9 +1,8 @@
-// pages/login.js
-
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import bcrypt from "bcryptjs";
+import { signIn } from "next-auth/react";
 
 export default function Login() {
   const router = useRouter();
@@ -19,13 +18,21 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const hashedPassword = await bcrypt.hash(formData.password, 10);
+    console.log(hashedPassword);
     try {
       const response = await axios.post(
         "http://localhost:8000/api/login",
         formData
       );
       console.log("Login successful", response.data);
-      router.push("/");
+      await signIn("credentials", {
+        email: formData.email,
+        password: hashedPassword,
+        redirect: true,
+        callbackUrl: "/",
+      });
+      //router.push("/");
     } catch (error) {
       setError("Login failed. Please check your credentials.");
     }
