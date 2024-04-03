@@ -41,14 +41,27 @@ const FormPage = () => {
     }
   }, [pokemonId]);
 
-  const handleInputChange = (e, index, arrayName, propName) => {
-    const { value } = e.target;
-    setPokemonData((prevState) => ({
-      ...prevState,
-      [arrayName]: prevState[arrayName].map((item, i) =>
-        i === index ? { ...item, [propName]: value } : item
-      ),
-    }));
+  const handleInputChange = (e, index, key, subKey) => {
+    const { name, value } = e.target;
+    if (key === "prev_evolution" || key === "next_evolution") {
+      const updatedEvolutions = [...pokemonData[key]];
+      updatedEvolutions[index][subKey] = value;
+      setPokemonData({
+        ...pokemonData,
+        [key]: updatedEvolutions,
+      });
+    }
+    if (name === "type") {
+      setPokemonData({
+        ...pokemonData,
+        [name]: value.split(",").map((type) => type.trim()),
+      });
+    } else {
+      setPokemonData({
+        ...pokemonData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -83,7 +96,7 @@ const FormPage = () => {
           <input
             type="text"
             name="type"
-            value={pokemonData.type.join(", ")}
+            value={pokemonData.type.join(",")}
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
@@ -131,7 +144,7 @@ const FormPage = () => {
         <div className="mb-4">
           <label className="block mb-2 font-bold">Multipliers:</label>
           <input
-            type="Number"
+            type="String"
             name="multipliers"
             value={pokemonData.multipliers}
             onChange={handleInputChange}
