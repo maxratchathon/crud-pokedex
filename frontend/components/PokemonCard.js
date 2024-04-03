@@ -3,6 +3,7 @@ import React from "react";
 import { MdEditDocument } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 import Pokemons from "../../backend/schema/PokemonSchema";
+import Link from "next/link";
 
 const PokemonCard = ({ pokemon }) => {
   async function onDelete() {
@@ -15,6 +16,16 @@ const PokemonCard = ({ pokemon }) => {
       console.log(`sent delete request with id: ${pokemon._id}`);
     } catch (error) {
       console.log("PokemonCard error: ", error);
+    }
+  }
+
+  async function onEdit() {
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/api/pokemon/${pokemon._id}`
+      );
+    } catch (error) {
+      console.log(`error occur: ${error}`);
     }
   }
 
@@ -72,7 +83,18 @@ const PokemonCard = ({ pokemon }) => {
 
         <div className="">
           <div className="absolute flex justify-end bottom-5 right-5 ">
-            <MdEditDocument size={30} className="text-gray-600" />
+            <Link
+              href={{
+                pathname: "/formPage",
+                query: { pokemonId: pokemon._id },
+              }}
+            >
+              <MdEditDocument
+                onClick={onEdit}
+                size={30}
+                className="text-gray-600"
+              />
+            </Link>
             <MdDeleteForever
               onClick={onDelete}
               size={30}

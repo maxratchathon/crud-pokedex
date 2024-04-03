@@ -20,11 +20,36 @@ app.get("/api/pokemon", async (req, res) => {
   }
 });
 
+app.get("/api/pokemon/:id", async (req, res) => {
+  const id = req.params.id;
+  console.log(`app.get id: ${id}`);
+
+  try {
+    const pokemons = await Pokemons.findById(id);
+    res.status(200).json(pokemons);
+  } catch (error) {
+    console.error("Error reading Pokemon data:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 app.post("/api/pokemon", async (req, res) => {
   try {
     console.log("req.body: ", req.body);
     const pokemons = await Pokemons.create(req.body);
     res.status(200).json({ message: "added successfully" });
+  } catch (error) {
+    console.log(`error occur ${error}`);
+  }
+});
+
+app.put("/api/pokemon/:id", async (req, res) => {
+  const id = req.params.id;
+  console.log(req.body);
+
+  try {
+    const pokemons = await Pokemons.findOneAndUpdate({ _id: id }, req.body);
+    res.status(200).json({ message: "update successfully" });
   } catch (error) {
     console.log(`error occur ${error}`);
   }
