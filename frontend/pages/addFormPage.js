@@ -25,22 +25,22 @@ const FormPage = () => {
     next_evolution: [{ num: "", name: "" }],
   });
 
-  useEffect(() => {
-    const fetchPokemonData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8000/api/pokemon/${pokemonId}`
-        );
-        setPokemonData(response.data);
-      } catch (error) {
-        console.error("Error fetching Pokémon data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchPokemonData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `http://localhost:8000/api/pokemon/${pokemonId}`
+  //       );
+  //       setPokemonData(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching Pokémon data:", error);
+  //     }
+  //   };
 
-    if (pokemonId) {
-      fetchPokemonData();
-    }
-  }, [pokemonId]);
+  //   if (pokemonId) {
+  //     fetchPokemonData();
+  //   }
+  // }, [pokemonId]);
 
   const handleInputChange = (e, index, key, subKey) => {
     const { name, value } = e.target;
@@ -68,8 +68,8 @@ const FormPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(
-        `http://localhost:8000/api/pokemon/${pokemonId}`,
+      const response = await axios.post(
+        `http://localhost:8000/api/pokemon/`,
         pokemonData
       );
       router.back();
@@ -251,7 +251,7 @@ const FormPage = () => {
           type="submit"
           className="px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600"
         >
-          Update Pokémon
+          Add Pokemon
         </button>
       </form>
     </div>

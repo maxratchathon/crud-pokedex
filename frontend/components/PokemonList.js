@@ -7,33 +7,7 @@ import { useRouter } from "next/router";
 const PokemonList = ({ pokemonData, onOpenModal }) => {
   const router = useRouter();
   async function onAdd() {
-    const data = {
-      id: 999,
-      num: "024",
-      name: "Arbok (test data)",
-      img: "http://www.serebii.net/pokemongo/pokemon/024.png",
-      type: ["Poison"],
-      height: "3.51 m",
-      weight: "65.0 kg",
-      candy: "Ekans Candy",
-      egg: "Not in Eggs",
-      multipliers: null,
-      weaknesses: ["Ground", "Psychic"],
-      spawn_chance: 0.072,
-      avg_spawns: 7.2,
-      spawn_time: "01:50",
-      prev_evolution: [{ num: "023", name: "Ekans" }],
-    };
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/pokemon",
-        data
-      );
-      router.reload();
-      console.log(`response: ${response}`);
-    } catch (error) {
-      console.log("error", error);
-    }
+    router.push("/addFormPage");
   }
 
   return (
@@ -57,10 +31,10 @@ const PokemonList = ({ pokemonData, onOpenModal }) => {
         )}
         <div
           onClick={onAdd}
-          className="w-[350px] h-[550px] flex flex-col justify-center gap-5 items-center bg-gray-100 p-6 rounded-lg shadow-md border border-gray-200"
+          className="hover:animate-shake w-[350px] h-[550px] flex flex-col justify-center gap-5 items-center bg-gray-100 p-6 rounded-lg shadow-md border border-gray-200"
         >
           <FaPlusCircle size={50} className="text-gray-600" />
-          <p className="text-gray-600 ">Add a new Pokemon</p>
+          <p className="text-gray-600 cursor-pointer ">Add a new Pokemon</p>
         </div>
       </div>
     </div>

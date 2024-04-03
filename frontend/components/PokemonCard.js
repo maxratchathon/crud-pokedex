@@ -17,8 +17,11 @@ const PokemonCard = ({ pokemon, onOpenModal }) => {
   }
 
   return (
-    <div className="relative flex flex-col justify-start items-center bg-white border  rounded-[15px] shadow-lg p-6 w-[350px] h-[550px]">
-      <img src={pokemon.img} className="w-[150px] " />
+    <div className=" relative flex flex-col justify-start items-center bg-white border  rounded-[15px] shadow-lg p-6 w-[350px] h-[550px]">
+      <img
+        src={pokemon.img}
+        className="w-[150px] hover:animate-jump animate-duration-[2000ms] animate-ease-in-out animate-normal"
+      />
       <h2 className="mb-2 text-xl font-semibold">
         {pokemon.num}. {pokemon.name}
       </h2>
@@ -103,7 +106,7 @@ const PokemonCard = ({ pokemon, onOpenModal }) => {
                 onOpenModal(pokemon);
               }}
               size={30}
-              className="text-gray-600"
+              className="text-gray-600 cursor-pointer"
             />
           </div>
         </div>
