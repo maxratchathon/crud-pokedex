@@ -247,12 +247,20 @@ const FormPage = () => {
             </div>
           ))}
         </div>
-        <button
-          type="submit"
-          className="px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600"
-        >
-          Add Pokemon
-        </button>
+        <div className="flex gap-5 mb-10">
+          <button
+            type="submit"
+            className="px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600"
+          >
+            Add Pokemon
+          </button>
+          <button
+            onClick={() => router.push("http://localhost:3000")}
+            className="px-4 py-2 font-bold text-white bg-gray-500 rounded-md hover:bg-blue-600"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

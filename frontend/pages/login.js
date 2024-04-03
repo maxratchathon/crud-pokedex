@@ -25,14 +25,14 @@ export default function Login() {
         "http://localhost:8000/api/login",
         formData
       );
-      console.log("Login successful", response.data);
+      console.log("Login successful", response);
       await signIn("credentials", {
         email: formData.email,
         password: hashedPassword,
         redirect: true,
         callbackUrl: "/",
       });
-      //router.push("/");
+      // router.push("/");
     } catch (error) {
       setError("Login failed. Please check your credentials.");
     }

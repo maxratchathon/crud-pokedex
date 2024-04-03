@@ -87,7 +87,7 @@ const FormPage = () => {
           <label className="block mb-2 font-bold">image url:</label>
           <input
             type="text"
-            name="name"
+            name="img"
             value={pokemonData.img}
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded-md"
@@ -247,12 +247,20 @@ const FormPage = () => {
             </div>
           ))}
         </div>
-        <button
-          type="submit"
-          className="px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600"
-        >
-          Update Pokémon
-        </button>
+        <div className="flex gap-5 mb-10">
+          <button
+            type="submit"
+            className="px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600"
+          >
+            Update Pokemon
+          </button>
+          <button
+            onClick={() => router.back()}
+            className="px-4 py-2 font-bold text-white bg-gray-500 rounded-md hover:bg-blue-600"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
