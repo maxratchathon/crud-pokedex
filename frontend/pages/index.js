@@ -64,12 +64,17 @@ const Home = () => {
   }
 
   return (
-    <>
-      Not signed in <br />
-      <button className={"bg-stone-500"} onClick={() => signIn()}>
-        Sign in
-      </button>
-    </>
+    <div className="flex items-center justify-center w-screen h-screen">
+      <div className="text-center">
+        <h1 className="mb-4 text-3xl">You are not signed in</h1>
+        <button
+          className="px-4 py-2 text-white rounded bg-stone-500"
+          onClick={() => signIn()}
+        >
+          Sign in
+        </button>
+      </div>
+    </div>
   );
 };
 

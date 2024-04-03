@@ -5,6 +5,8 @@ const { connectDB } = require("./db/connectDB");
 const PORT = 8000;
 const Pokemons = require("./schema/PokemonSchema.js");
 const cors = require("cors");
+const User = require("./schema/UserSchema.js");
+const bcrypt = require("bcryptjs");
 
 connectDB();
 app.use(express.json());
@@ -67,6 +69,40 @@ app.delete("/api/pokemon/:id", async (req, res) => {
     }
   } catch (error) {
     console.log(error);
+  }
+});
+
+// Login and Register
+app.post("/api/register/", async (req, res) => {
+  try {
+    console.log(req.body);
+    const response = User.create(req.body);
+    res.status(200).json({ message: "Register Successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/api/login/", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatch) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    return res.status(200).json({ message: "Login successful", user });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 });
 

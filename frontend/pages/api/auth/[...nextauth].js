@@ -1,45 +1,59 @@
 import NextAuth from "next-auth";
-import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import User from "../../../../backend/schema/UserSchema";
 
-export const authOptions = {
-  // Configure one or more authentication providers
+const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. "Sign in with...")
-      name: "Credentials",
-      // `credentials` is used to generate a form on the sign in page.
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
+      name: "E-mail",
       credentials: {
-        username: { label: "Username", type: "text" },
+        username: { label: "E-mail", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        const user = {
-          id: "1",
-          name: "maxratchathon",
-          email: "maxratchathon@gmail.com",
-        };
+        try {
+          // Connect to MongoDB
+          await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+          });
 
-        if (user.name == "maxratchathon") {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
+          // Find user by email
+          const user = await User.findOne({ email: credentials.username });
+
+          if (!user) {
+            return null; // User not found
+          }
+
+          // Compare passwords
+          const isPasswordValid = await bcrypt.compare(
+            credentials.password,
+            user.password
+          );
+
+          if (!isPasswordValid) {
+            return null; // Passwords don't match
+          }
+
+          // User authenticated successfully
+          return { id: user._id, email: user.email, name: user.name };
+        } catch (error) {
+          console.error("Error authenticating user:", error);
           return null;
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+        } finally {
+          // Close MongoDB connection
+          await mongoose.connection.close();
         }
       },
     }),
   ],
 };
+
 export default NextAuth(authOptions);

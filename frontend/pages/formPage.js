@@ -71,6 +71,7 @@ const FormPage = () => {
         `http://localhost:8000/api/pokemon/${pokemonId}`,
         pokemonData
       );
+      router.back();
       console.log("Update successful:", response.data);
     } catch (error) {
       console.error("Error updating Pokémon:", error);
