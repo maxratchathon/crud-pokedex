@@ -36,25 +36,41 @@ const PokemonCard = ({ pokemon, onOpenModal }) => {
         <p className="text-gray-600">
           <span className="font-bold">Egg: </span> {pokemon.egg}
         </p>
-        <p className="text-gray-600">
-          <span className="font-bold">Multipliers: </span> {pokemon.multipliers}
-        </p>
+        {pokemon.multipliers ? (
+          <p className="text-gray-600">
+            <span className="font-bold">Multipliers: </span>{" "}
+            {pokemon.multipliers}
+          </p>
+        ) : null}
+
         <p className="text-gray-600 whitespace-wrap">
           <span className="font-bold">Weaknesses: </span>{" "}
           {pokemon.weaknesses.join(", ")}
         </p>
-        {pokemon.prev_evolution.length != 0 ? (
+        {pokemon.prev_evolution.length !== 0 ? (
           <p className="text-gray-600 whitespace-wrap">
             <span className="font-bold">Previous Evolution: </span>{" "}
-            {pokemon.prev_evolution.join(", ")}
+            {pokemon.prev_evolution.map((evolution, index) => (
+              <span key={index}>
+                {evolution.name}
+                {index !== pokemon.prev_evolution.length - 1 && ", "}
+              </span>
+            ))}
           </p>
         ) : null}
-        {pokemon.next_evolution.length != 0 ? (
+
+        {pokemon.next_evolution.length !== 0 ? (
           <p className="text-gray-600 whitespace-wrap">
             <span className="font-bold">Next Evolution: </span>{" "}
-            {pokemon.next_evolution.join(", ")}
+            {pokemon.next_evolution.map((evolution, index) => (
+              <span key={index}>
+                {evolution.name}
+                {index !== pokemon.next_evolution.length - 1 && ", "}
+              </span>
+            ))}
           </p>
         ) : null}
+
         <p className="text-gray-600 whitespace-wrap">
           <span className="font-bold">Candy: </span> {pokemon.candy}{" "}
           {pokemon.candy_count ? " : " + pokemon.candy_count : null}
