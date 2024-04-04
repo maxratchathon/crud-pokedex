@@ -112,6 +112,16 @@ const FormPage = () => {
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
+        </div>{" "}
+        <div className="mb-4">
+          <label className="block mb-2 font-bold">Number (3 digits):</label>
+          <input
+            type="text"
+            name="num"
+            value={pokemonData.num}
+            onChange={handleInputChange}
+            className="w-full p-2 border border-gray-300 rounded-md"
+          />
         </div>
         <div className="mb-4">
           <label className="block mb-2 font-bold">Type:</label>
