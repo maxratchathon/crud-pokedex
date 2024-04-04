@@ -21,8 +21,8 @@ const FormPage = () => {
     candy_count: 0,
     spawn_chance: 0,
     avg_spawns: 0,
-    prev_evolution: [{ num: "", name: "" }],
-    next_evolution: [{ num: "", name: "" }],
+    //prev_evolution: [{ num: "", name: "" }],
+    //next_evolution: [{ num: "", name: "" }],
   });
 
   useEffect(() => {
@@ -31,6 +31,7 @@ const FormPage = () => {
         const response = await axios.get(
           `http://localhost:8000/api/pokemon/${pokemonId}`
         );
+        console.log(response.data);
         setPokemonData(response.data);
       } catch (error) {
         console.error("Error fetching Pokémon data:", error);
@@ -76,6 +77,15 @@ const FormPage = () => {
       console.log("Update successful:", response.data);
     } catch (error) {
       console.error("Error updating Pokémon:", error);
+    }
+  };
+
+  const onCancel = async () => {
+    try {
+      console.log("routing back");
+      router.back();
+    } catch {
+      console.log(`cancel error: ${error}`);
     }
   };
 
@@ -193,7 +203,7 @@ const FormPage = () => {
             className="w-full p-2 border border-gray-300 rounded-md"
           />
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block mb-2 font-bold">Previous Evolution:</label>
           {pokemonData.prev_evolution.map((evolution, index) => (
             <div key={index} className="flex mb-2">
@@ -222,7 +232,7 @@ const FormPage = () => {
         </div>
         <div className="mb-4">
           <label className="block mb-2 font-bold">Next Evolution:</label>
-          {pokemonData.next_evolution.map((evolution, index) => (
+          {pokemonData.next_evolution.map((evolution, index) => {
             <div key={index} className="flex mb-2">
               <input
                 type="text"
@@ -244,9 +254,9 @@ const FormPage = () => {
                 className="w-full p-2 border border-gray-300 rounded-md"
                 placeholder="Name"
               />
-            </div>
-          ))}
-        </div>
+            </div>;
+          })} 
+        </div> */}
         <div className="flex gap-5 mb-10">
           <button
             type="submit"
@@ -254,12 +264,12 @@ const FormPage = () => {
           >
             Update Pokemon
           </button>
-          <button
-            onClick={() => router.back()}
+          {/* <button
+            onClick={onCancel}
             className="px-4 py-2 font-bold text-white bg-gray-500 rounded-md hover:bg-blue-600"
           >
             Cancel
-          </button>
+          </button> */}
         </div>
       </form>
     </div>

@@ -10,7 +10,7 @@ const Home = () => {
   const [pokemonData, setPokemonData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [showModal, setShowModal] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
@@ -40,6 +40,9 @@ const Home = () => {
   };
 
   if (session) {
+    if (session === "authenticated") {
+      return <p>Signed in as {session.user.email}</p>;
+    }
     return (
       <div className="flex flex-col justify-center">
         <NavBar />

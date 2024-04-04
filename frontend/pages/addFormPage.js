@@ -16,7 +16,7 @@ const FormPage = () => {
     weight: "",
     candy: "",
     egg: "",
-    multipliers: [],
+    multipliers: [] ,
     weaknesses: [],
     candy_count: 0,
     spawn_chance: 0,
@@ -155,7 +155,7 @@ const FormPage = () => {
         </div>
         <div className="mb-4">
           <label className="block mb-2 font-bold">Multipliers:</label>
-          <inputs
+          <input
             type="String"
             name="multipliers"
             value={pokemonData.multipliers}
@@ -193,7 +193,7 @@ const FormPage = () => {
             className="w-full p-2 border border-gray-300 rounded-md"
           />
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block mb-2 font-bold">Previous Evolution:</label>
           {pokemonData.prev_evolution.map((evolution, index) => (
             <div key={index} className="flex mb-2">
@@ -246,7 +246,7 @@ const FormPage = () => {
               />
             </div>
           ))}
-        </div>
+        </div> */}
         <div className="flex gap-5 mb-10">
           <button
             type="submit"
@@ -254,12 +254,12 @@ const FormPage = () => {
           >
             Add Pokemon
           </button>
-          <button
+          {/* <button
             onClick={() => router.push("http://localhost:3000")}
             className="px-4 py-2 font-bold text-white bg-gray-500 rounded-md hover:bg-blue-600"
           >
             Cancel
-          </button>
+          </button> */}
         </div>
       </form>
     </div>

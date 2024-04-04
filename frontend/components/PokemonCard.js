@@ -50,7 +50,7 @@ const PokemonCard = ({ pokemon, onOpenModal }) => {
           <span className="font-bold">Weaknesses: </span>{" "}
           {pokemon.weaknesses.join(", ")}
         </p>
-        {pokemon.prev_evolution.length !== 0 ? (
+        {/* {pokemon.prev_evolution.length !== 0 ? (
           <p className="text-gray-600 whitespace-wrap">
             <span className="font-bold">Previous Evolution: </span>{" "}
             {pokemon.prev_evolution.map((evolution, index) => (
@@ -72,7 +72,7 @@ const PokemonCard = ({ pokemon, onOpenModal }) => {
               </span>
             ))}
           </p>
-        ) : null}
+        ) : null} */}
 
         <p className="text-gray-600 whitespace-wrap">
           <span className="font-bold">Candy: </span> {pokemon.candy}{" "}
