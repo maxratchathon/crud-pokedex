@@ -18,7 +18,7 @@ export default function NavBar() {
     signOut();
   }
   return (
-    <Disclosure as="nav" className="bg-gray-500">
+    <Disclosure as="nav" className="bg-gray-500 shadow-xl ">
       {({ open }) => (
         <>
           <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -42,7 +42,7 @@ export default function NavBar() {
                     src="/pokemonIcon.png"
                     alt="Pokemon"
                   />
-                  <p className="text-white">CRUD Pokedex</p>
+                  <p className="font-bold text-white">CRUD Pokedex</p>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">

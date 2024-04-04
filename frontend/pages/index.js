@@ -52,16 +52,18 @@ const Home = () => {
           <p>{error}</p>
         ) : (
           <>
-            {showModal && (
-              <DeleteModal
-                onCloseModal={handleCloseModal}
-                pokemon={selectedPokemon}
+            <div className="flex font-primary">
+              {showModal && (
+                <DeleteModal
+                  onCloseModal={handleCloseModal}
+                  pokemon={selectedPokemon}
+                />
+              )}
+              <PokemonList
+                pokemonData={pokemonData}
+                onOpenModal={handleOpenModal}
               />
-            )}
-            <PokemonList
-              pokemonData={pokemonData}
-              onOpenModal={handleOpenModal}
-            />
+            </div>
           </>
         )}
       </div>

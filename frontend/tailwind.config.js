@@ -9,7 +9,7 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: { fontFamily: { primary: ["prompt", "sans-serif"] } },
   },
   plugins: [require("tailwindcss-animated")],
 };

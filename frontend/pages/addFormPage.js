@@ -16,7 +16,7 @@ const FormPage = () => {
     weight: "",
     candy: "",
     egg: "",
-    multipliers: [] ,
+    multipliers: [],
     weaknesses: [],
     candy_count: 0,
     spawn_chance: 0,
@@ -87,7 +87,7 @@ const FormPage = () => {
           <label className="block mb-2 font-bold">image url:</label>
           <input
             type="text"
-            name="name"
+            name="img"
             value={pokemonData.img}
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded-md"
