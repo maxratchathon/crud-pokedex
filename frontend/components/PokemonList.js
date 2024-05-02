@@ -1,11 +1,12 @@
 import React from "react";
 import PokemonCard from "./PokemonCard";
 import { FaPlusCircle } from "react-icons/fa";
-import axios from "axios";
+import { Button, Typography, Grid } from "@mui/material"; // Import Material-UI components
 import { useRouter } from "next/router";
 
 const PokemonList = ({ pokemonData, onOpenModal }) => {
   const router = useRouter();
+
   async function onAdd() {
     router.push("/addFormPage");
   }
@@ -13,30 +14,32 @@ const PokemonList = ({ pokemonData, onOpenModal }) => {
   return (
     <div className="flex flex-col px-4 mx-auto">
       <div className="">
-        <h1 className="m-10 mb-10 text-3xl font-bold text-center">
+        <Typography variant="h4" align="center" gutterBottom>
           CRUD Pokedex
-        </h1>
+        </Typography>
       </div>
-      <div className="flex flex-wrap gap-10 lg:w-[150vh] justify-center">
+      <Grid container spacing={3} justifyContent="center">
         {pokemonData && pokemonData.length > 0 ? (
           pokemonData.map((pokemon) => (
-            <PokemonCard
-              key={pokemon._id}
-              pokemon={pokemon}
-              onOpenModal={onOpenModal}
-            />
+            <Grid item key={pokemon._id} xs={12} sm={6} md={4} lg={3}>
+              <PokemonCard pokemon={pokemon} onOpenModal={onOpenModal} />
+            </Grid>
           ))
         ) : (
-          <p>No Pokemon found.</p>
+          <Typography variant="body1">No Pokemon found.</Typography>
         )}
-        <div
-          onClick={onAdd}
-          className="hover:animate-shake w-[350px] h-[550px] flex flex-col justify-center gap-5 items-center bg-gray-100 p-6 rounded-lg shadow-md border border-gray-200"
-        >
-          <FaPlusCircle size={50} className="text-gray-600" />
-          <p className="text-gray-600 cursor-pointer ">Add a new Pokemon</p>
-        </div>
-      </div>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+          <div
+            onClick={onAdd}
+            className="flex flex-col items-center justify-center w-full h-full gap-5 p-6 bg-gray-100 border border-gray-200 rounded-lg shadow-md cursor-pointer hover:animate-shake"
+          >
+            <FaPlusCircle size={50} className="text-gray-600" />
+            <Typography variant="body1" className="text-gray-600">
+              Add a new Pokemon
+            </Typography>
+          </div>
+        </Grid>
+      </Grid>
     </div>
   );
 };
